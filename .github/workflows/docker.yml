@@ -31,4 +31,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: rolfkopman/os4env:latest
+        tags: rolfkopman/arosi386v0env:latest
