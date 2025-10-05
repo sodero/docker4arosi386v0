@@ -27,16 +27,7 @@ RUN cp MCC_TheBar/Developer/C/include/mui/TheBar_mcc.h /opt/alt-abiv0-linux-i386
 RUN mv MCC_TheBar/Developer/C/include/mui/TheBar_mcc.h /opt/alt-abiv0-linux-i386-d/bin/linux-i386/AROS/Development/include/mui
 RUN rm -rf MCC_TheBar portssource
 
-RUN mkdir bin
+RUN cd /opt/toolchain-alt-abiv0-i386 && for f in i386-aros-*; do ln $f $(echo $f | sed -e 's/i386-aros-//') 2> /dev/null; done; ln -s gcc cc
 
-COPY bin/as bin
-COPY bin/c++ bin
-COPY bin/cpp bin
-COPY bin/g++ bin
-COPY bin/gcc bin
-COPY bin/gcc-6.5.0 bin
-
-RUN cd bin && for f in /opt/toolchain-alt-abiv0-i386/i386-aros-*; do ln -s $f $(echo $f | sed -e 's/.*i386-aros-//') 2> /dev/null; done
-
-ENV PATH="/opt/bin:$PATH"
+ENV PATH="/opt/toolchain-alt-abiv0-i386:$PATH"
 ENV LHAFLAGS=ao5
