@@ -1,17 +1,26 @@
-FROM debian:bullseye
+FROM debian:trixie
 
 RUN export DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update
-RUN apt-get install -y git gcc g++ make gawk bison flex bzip2 netpbm autoconf
-RUN apt-get install -y automake libx11-dev libxext-dev libc6-dev liblzo2-dev
-RUN apt-get install -y libxxf86vm-dev libpng-dev gcc-multilib libsdl1.2-dev byacc
-RUN apt-get install -y cmake genisoimage dh-make yasm curl zsh libmpc-dev unzip
-RUN apt-get install -y python3-mako libxcursor-dev lhasa
+
+RUN apt-get install -y git gcc g++ make gawk bison flex bzip2 netpbm autoconf \
+    automake libx11-dev libxext-dev libc6-dev liblzo2-dev libxxf86vm-dev \
+    libpng-dev gcc-multilib libsdl1.2-dev byacc cmake genisoimage dh-make yasm \
+    curl zsh libmpc-dev unzip python3-mako libxcursor-dev lhasa
 
 WORKDIR /opt
 
-RUN git clone --depth=1 https://github.com/sodero/lha.git
-RUN cd lha && aclocal && autoheader && automake -a && autoconf && ./configure CC=/usr/bin/cc && make && make install && cd -
+RUN git clone --depth=1 https://github.com/sodero/lha.git && \
+    cd lha && \
+    aclocal && \
+    autoheader && \
+    automake -a && \
+    autoconf && \
+    ./configure CC=/usr/bin/cc && \
+    make && \
+    make install && \
+    cd -
 
 RUN mkdir portssources
 
@@ -23,8 +32,9 @@ ADD https://pub.sortix.org/mirror/libjpeg/jpegsrc.v9e.tar.gz portssources/jpegsr
 
 RUN git clone --depth 1 -b alt-abiv0 https://github.com/deadwood2/AROS.git AROS
 
-RUN echo "1" | AROS/scripts/rebuild.sh
-RUN echo "3" | AROS/scripts/rebuild.sh
+RUN echo "1" | AROS/scripts/rebuild.sh i386
+RUN echo "3" | AROS/scripts/rebuild.sh i386
+RUN echo "6" | AROS/scripts/rebuild.sh i386
 
 RUN lha e portssource/MCC_TheBar-26.22.lha
 RUN cp MCC_TheBar/Developer/C/include/mui/TheBar_mcc.h /opt/alt-abiv0-linux-i386-d/bin/linux-i386/gen/include/mui
