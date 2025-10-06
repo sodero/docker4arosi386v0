@@ -22,6 +22,11 @@ RUN git clone --depth=1 https://github.com/sodero/lha.git && \
     make install && \
     cd -
 
+RUN git clone --depth=1 https://github.com/adtools/flexcat.git && \
+    make -C flexcat
+
+RUN install flexcat/src/bin_unix/flexcat /usr/local/bin
+
 RUN mkdir portssources
 
 ADD https://mirror-hk.koddos.net/libreboot/misc/acpica/acpica-unix-20230331.tar.gz portssources/acpica-unix-20230331.tar.gz
@@ -47,3 +52,10 @@ RUN cd bin && for f in /opt/toolchain-alt-abiv0-i386/i386-aros-*; do ln -s $f $(
 
 ENV PATH="/opt/bin:$PATH"
 ENV LHAFLAGS=ao5
+ENV DD=..
+
+RUN git clone --depth=1 https://github.com/sodero/InstallerLG.git && \
+    make -C InstallerLG/build
+
+RUN mkdir native && \
+    cp InstallerLG/build/Installer native
