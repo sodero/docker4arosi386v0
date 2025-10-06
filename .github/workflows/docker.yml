@@ -1,4 +1,4 @@
-name: Build AROS cross-compiler environment
+name: Build AROS i386 cross-compiler environment
 
 on:
   push:
