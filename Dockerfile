@@ -5,6 +5,10 @@ RUN apt-get update
 RUN apt-get install -y git gcc g++ make gawk bison flex bzip2 netpbm autoconf automake libx11-dev libxext-dev libc6-dev liblzo2-dev libxxf86vm-dev libpng-dev gcc-multilib libsdl1.2-dev byacc python3-mako libxcursor-dev cmake genisoimage dh-make yasm curl zsh libmpc-dev
 
 WORKDIR /opt
+
+RUN git clone --depth=1 https://github.com/sodero/lha.git
+RUN cd lha && aclocal && autoheader && automake -a && autoconf && ./configure CC=/usr/bin/cc && make && make install && cd -
+
 RUN mkdir portssources
 
 ADD https://mirror-hk.koddos.net/libreboot/misc/acpica/acpica-unix-20230331.tar.gz portssources/acpica-unix-20230331.tar.gz
