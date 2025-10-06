@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/opt/toolchain-alt-abiv0-i386/i386-aros-gcc --sysroot=/opt/alt-abiv0-linux-i386-d/bin/linux-i386/AROS/Development "$@"
