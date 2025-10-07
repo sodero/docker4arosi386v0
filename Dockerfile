@@ -23,7 +23,10 @@ RUN git clone --depth=1 https://github.com/sodero/lha.git && \
     cd -
 
 RUN git clone --depth=1 https://github.com/adtools/flexcat.git && \
-    make -C flexcat
+    cd flexcat && \
+    make bootstrap && \
+    make && \
+    cd -
 
 RUN install flexcat/src/bin_unix/flexcat /usr/local/bin
 
