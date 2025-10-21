@@ -32,7 +32,6 @@ RUN install flexcat/src/bin_unix/flexcat /usr/local/bin
 
 RUN mkdir portssources
 
-ADD https://mirror-hk.koddos.net/libreboot/misc/acpica/acpica-unix-20230331.tar.gz portssources/acpica-unix-20230331.tar.gz
 ADD https://ftp.acc.umu.se/mirror/gnu.org/gnu/mpc/mpc-1.3.1.tar.gz portssources/mpc-1.3.1.tar.gz
 ADD http://aminet.net/dev/mui/MCC_TheBar-26.22.lha portssource/MCC_TheBar-26.22.lha
 ADD https://download-mirror.savannah.gnu.org/releases/freetype/ftdmo2103.zip portssources/ftdmo2103.zip
