@@ -62,3 +62,5 @@ RUN git clone --depth=1 https://github.com/sodero/InstallerLG.git && \
 
 RUN mkdir native && \
     cp InstallerLG/build/Installer native
+
+RUN echo 'alias ll="ls -la"' >> ~/.bashrc
